@@ -7,6 +7,7 @@ source "https://rubygems.org"
 
 # gem "rails"
 gem "jekyll"
+gem 'jekyll-sitemap'
 
 
 gem "kramdown-parser-gfm", "~> 1.1"
