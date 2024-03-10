@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Home
+title: Minh Trinh - about him
 permalink: /interior/about-me/
 ---
 

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Research
+title: Minh Trinh - Research
 permalink: /interior/research/
 ---
 

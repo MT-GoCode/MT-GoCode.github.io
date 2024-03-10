@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Work
+title: Minh Trinh - Work
 permalink: /interior/work/
 ---
 
