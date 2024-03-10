@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TARDIS Intro</title>
+    <link rel="stylesheet" href="assets/css/intro-style.css"> <!-- Path to your CSS file -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
+
+    <style>
+        #intro-text {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 900; /* 900 is the weight for black */
+            position: relative;
+            padding-bottom: 20px; /* Provides space for the arrow */
+            color: black;
+        }
+    
+        #intro-text::after {
+            content: '↓'; /* Arrow character */
+            color: black;
+            position: absolute;
+            left: 50%; /* Center the arrow horizontally */
+            bottom: 0;
+            transform: translateX(-50%); /* Center the arrow precisely */
+            font-size: 24px; /* Adjust the size of the arrow as needed */
+        }
+    </style>
+
+</head>
+<body style="background: url('assets/images/space-background.jpg') no-repeat center center fixed; background-size: cover;"> <!-- Spacey background -->
+    <div id="tardis-container">
+        <div id="intro-text">
+            Hi, I'm Minh Trinh. Click the TARDIS below to learn more about me.
+        </div>
+        <img id="tardis-img" src="assets/images/tardis.png" alt="TARDIS">
+        <div><a href="#">🛈 I don't get the reference... </a></div>
+    </div>
+
+    <script>
+        document.getElementById('tardis-img').addEventListener('click', function() {
+            window.location.href = '{{ site.baseurl }} /interior/about-me';
+        });
+
+        let angle = 0; // Starting angle
+        const radius = 20; // Radius of the circle
+
+        function moveTardisInCircle() {
+            const tardisImg = document.getElementById('tardis-img');
+            // Calculate the new position
+            const xPos = radius * Math.cos(angle);
+            const yPos = radius * Math.sin(angle);
+            // Apply the new position
+            tardisImg.style.transform = `translate(${xPos}px, ${yPos}px)`;
+            // Increment the angle for the next frame
+            angle += 0.01; // Adjust this value to control the speed of the rotation
+        }
+
+        // Call moveTardisInCircle periodically to create the animation
+        setInterval(moveTardisInCircle, 20); // Adjust the interval for different speeds
+    </script>
+</body>
+</html>

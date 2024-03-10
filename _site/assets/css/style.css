@@ -1,0 +1,150 @@
+body {
+  background-color: #1E1E1E;
+  font-family: 'Roboto', sans-serif;
+  color: #40E0D0;
+  line-height: 1.6; /* Improved line spacing */
+}
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  width: 300px; /* Wider sidebar for better spacing */
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background for sidebar */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 2px solid #40E0D0;
+}
+
+.sidebar nav a {
+  color: #40E0D0;
+  font-size: 24px;
+  padding: 15px; /* More padding for better touch targets */
+  display: block;
+  text-decoration: none;
+}
+
+.sidebar nav a:hover {
+  background-color: rgba(64, 224, 208, 0.1); /* Subtle hover effect */
+  text-decoration: none; /* Keeping links without underline */
+}
+
+.content-container {
+  margin-left: 300px; /* Adjust to match the sidebar width */
+  padding: 40px; /* More padding for better reading experience */
+  color: #FFFFFF; /* White color for better readability */
+  background-color: #1E1E1E; /* Slightly lighter bg color for the content area */
+  /* min-height: 100vh; Full height for content area */
+}
+
+h1 {
+  font-size: 2.5rem; /* Larger font size for headings */
+  margin-bottom: 20px; /* Space after headings */
+  color: #40E0D0; /* Highlight color for headings */
+}
+
+p {
+  margin-bottom: 20px; /* Space after paragraphs */
+}
+
+a {
+  color: #40E0D0;
+  text-decoration: none; /* No underline by default */
+}
+
+a:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+
+/* Responsive typography */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px; /* Smaller font size on smaller screens */
+  }
+
+  .sidebar {
+    width: 200px; /* Narrower sidebar for small screens */
+  }
+
+  .content-container {
+    margin-left: 200px; /* Adjust to match the new sidebar width */
+    padding: 20px; /* Less padding on smaller screens */
+  }
+}
+
+
+
+.profile-image {
+  float: right; /* Align the image to the right */
+  width: 300px; /* or your desired width */
+  height: auto; /* maintain aspect ratio */
+  border: 5px solid #40E0D0; /* turquoise border */
+  border-radius: 15px; /* rounded corners */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5); /* shadow effect */
+  margin-left: 20px; /* space between the image and text */
+}
+
+@media (max-width: 768px) {
+  .profile-image {
+    float: none; /* Stack the image on smaller screens */
+    display: block;
+    margin: 0 auto 20px auto; /* Center image and add space below on smaller screens */
+  }
+}
+
+.card {
+  border: 4px solid turquoise; /* Thick turquoise border */
+  background-color: rgba(64, 224, 208, 0.1); 
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column; /* Organizes child divs into a column */
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between; /* Puts the elements on opposite ends */
+  margin-bottom: 10px;
+}
+
+.card-header > div {
+  flex: 1; /* Allows the divs to fill the available horizontal space */
+  margin-right: 10px; /* Provides spacing between the columns */
+}
+
+.card-header > div:last-child {
+  margin-right: 0; /* Removes the margin from the last child to prevent overflow */
+}
+
+.card-header h2,
+.card-header p {
+  margin: 0;
+}
+
+.card-content {
+  clear: both; /* Clears floated elements, if any */
+}
+
+.card-content p {
+  margin: 10px 0; /* Space above and below the description */
+  font-size: 18px; /* Larger font size for the description */
+}
+
+.card-header p,
+.card-content p {
+  font-size: 16px; /* Adjust font size for header elements */
+  line-height: 1.4; /* Adjust line height to make text more compact */
+}
+
+.card .time,
+.card .location {
+  font-style: italic;
+  text-align: right; /* Aligns text to the right */
+}
+
+/* This makes sure the last item in the header doesn't have extra margin on the right */
+.card-header > div:last-child {
+  margin-right: 0;
+}
