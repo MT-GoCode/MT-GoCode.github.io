@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Minh Trinh - Awards
+title: Awards
 permalink: /interior/awards/
 ---
 
