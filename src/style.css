@@ -1,0 +1,70 @@
+@import '@fontsource/atkinson-hyperlegible-mono/400.css';
+@import '@fontsource/atkinson-hyperlegible-mono/700.css';
+
+body { color: #f2f2f2; font-family: 'Atkinson Hyperlegible Mono', monospace; }
+/* lvh: stays put while a phone's toolbar slides, so the canvas is not resized mid-scroll. */
+#scene { position: fixed; top: 0; left: 0; width: 100%; height: 100lvh; }
+#scene::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at center, transparent 45%, rgba(0, 0, 0, 0.7) 100%); }
+#runway { height: 900vh; }
+/* The monitor's screen: placed and sized in 3D (pages.js), shown only from the front (interior.js). */
+#pages { position: absolute; inset: 0; z-index: 1; overflow: hidden; }
+#card { box-sizing: border-box; background: #000; padding: min(2.5rem, 6vw) min(3rem, 6vw); overflow: auto; }
+#card > section:not([hidden]) { display: flex; flex-direction: column; }
+#card > [data-page='home'] { height: 100%; }
+#card h1 { margin: 0; font-size: 1.5rem; font-weight: 700; letter-spacing: 0.02em; }
+#card h2 { margin: 1.5rem 0 1.25rem; font-size: 1.25rem; font-weight: 700; }
+
+/* The grid: the largest squares that fit `--columns` across and `--rows` down whatever the window's shape. */
+#card nav { flex: 1; container-type: size; display: grid; justify-content: center; align-content: start; margin-top: 1.5rem; }
+.grid {
+  --gap: 4cqmin;
+  --s: min((100cqw - (var(--columns) - 1) * var(--gap)) / var(--columns), (100cqh - (var(--rows) - 1) * var(--gap)) / var(--rows));
+  display: grid;
+  grid-template-columns: repeat(var(--columns), var(--s));
+  grid-auto-rows: var(--s);
+  gap: var(--gap);
+}
+.tile {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10%; box-sizing: border-box; padding: 0;
+  border: 1px solid #262b36; border-radius: 6px; background: #05070b; color: #c9d3e6; font: inherit; text-decoration: none;
+  transition: border-color 0.15s, box-shadow 0.15s, color 0.15s;
+}
+.tile svg { width: 32%; height: 32%; }
+/* In the flow even while hidden, so the icon stays put as it comes up; one line at any cell size. */
+.tile span {
+  font-size: clamp(0.6rem, var(--s) * 0.09, 1.1rem); white-space: nowrap;
+  opacity: 0; transform: translateY(0.4em); transition: opacity 0.2s, transform 0.2s;
+}
+.tile:is(a):is(:hover, :focus-visible, .lit) {
+  outline: none; border-color: #38b6ff; color: #fff; box-shadow: 0 0 10px #38b6ff, inset 0 0 10px rgb(56 182 255 / 0.4);
+}
+.tile:is(a):is(:hover, :focus-visible, .lit) span { opacity: 1; transform: none; }
+.tile.empty { background: #111318; border-color: #1b1e25; }
+/* Touch screens never hover: the labels are always up. */
+@media (hover: none) { .tile span { opacity: 1; transform: none; } }
+
+/* A tile's own page: back, title, then its list. */
+.back { align-self: flex-start; color: #8fa3c4; text-decoration: none; }
+.back:is(:hover, :focus-visible) { outline: none; color: #38b6ff; }
+#card ul { display: flex; flex-direction: column; gap: 1.25rem; margin: 0; padding: 0; list-style: none; }
+#card li a { color: #38b6ff; font-weight: 700; text-decoration: none; }
+#card li a:is(:hover, :focus-visible) { text-decoration: underline; }
+/* An entry's own anchor: shown on hover or focus, always on touch. A linked-to entry stays lit. */
+#card li { padding-left: 0.9rem; border-left: 2px solid transparent; transition: border-color 0.2s, background 0.2s; }
+#card li.lit { border-left-color: #38b6ff; background: linear-gradient(90deg, rgb(56 182 255 / 0.12), transparent 70%); }
+#card li .anchor { color: #5d6b85; font-weight: 400; opacity: 0; transition: opacity 0.15s; }
+#card li:is(:hover, :focus-within) .anchor { opacity: 1; }
+@media (hover: none) { #card li .anchor { opacity: 1; } }
+#card li p { margin: 0.35rem 0 0; color: #b8c2d4; line-height: 1.5; }
+#card li b { color: #e6ebf5; }
+#hint { position: fixed; bottom: 2rem; width: 100%; margin: 0; text-align: center; font-size: 0.8rem; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.55; z-index: 1; }
+
+
+#robot { font-family: 'Atkinson Hyperlegible Mono', monospace; }
+
+/* Sonic screwdriver cursor, emitter tip on the hotspot (5,5). Pressing anywhere makes the page :active,
+   which swaps in the lit image for exactly as long as the button is held. Images: scripts/cursor.mjs. */
+@media (pointer: fine) {
+  html, html * { cursor: image-set(url('/cursor/sonic.png') 1x, url('/cursor/sonic@2x.png') 2x) 5 5, auto; }
+  html:active, html:active * { cursor: image-set(url('/cursor/sonic-lit.png') 1x, url('/cursor/sonic-lit@2x.png') 2x) 5 5, auto; }
+}

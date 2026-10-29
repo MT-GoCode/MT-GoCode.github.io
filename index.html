@@ -1,87 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-PNXVB4FF');</script>
+<!doctype html>
+<html lang="en" class="loading">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>%NAME%</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="description" content="%NAME%. There's a TARDIS." />
     <meta name="google-site-verification" content="Nh5qQj1ETYUVJkIcbgxDLqKXna_V0Lz-0jR_0rGM8nY" />
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9NR94LVR69"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-9NR94LVR69');
-</script>
-
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minh Trinh</title>
-    <link rel="stylesheet" href="assets/css/intro-style.css"> <!-- Path to your CSS file -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
-    
-
+    <meta property="og:title" content="%NAME%" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="%URL%" />
+    <!-- Fetched alongside the bundle, not after it runs: the loader waits on the stars. -->
+    <link rel="preload" href="/stars.bin" as="fetch" crossorigin />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="All content, as plain text for agents" />
+    <script type="application/ld+json">%PERSON%</script>
+    <!-- Critical CSS: applies before any script runs, so the page is dark from the first paint and the agent text never shows. -->
     <style>
-        #intro-text {
-            font-family: 'Roboto', sans-serif;
-            font-weight: 900; /* 900 is the weight for black */
-            position: relative;
-            padding-bottom: 20px; /* Provides space for the arrow */
-            color: black;
-        }
-    
-        #intro-text::after {
-            content: '↓'; /* Arrow character */
-            color: black;
-            position: absolute;
-            left: 50%; /* Center the arrow horizontally */
-            bottom: 0;
-            transform: translateX(-50%); /* Center the arrow precisely */
-            font-size: 24px; /* Adjust the size of the arrow as needed */
-        }
+      html, body { margin: 0; background: #04060b; }
+      html.loading { overflow: hidden; }
+      /* Off-screen, not display:none: text extractors and accessibility snapshots still read it. */
+      #for-agents { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+      #loader { position: fixed; inset: 0; z-index: 5; display: grid; place-items: center; background: #04060b; transition: opacity 0.8s; }
+      #loader img { width: 56px; height: 56px; animation: materialise 2.4s ease-in-out infinite; }
+      /* Never in the page's flow: it is the monitor's screen, placed in 3D, and must not lengthen the scroll. */
+      #card { position: absolute; top: 0; left: 0; }
+      /* Above the loader: an automated visitor may never see it lift. */
+      #robot { position: fixed; top: 0; left: 0; right: 0; z-index: 6; margin: 0; padding: 0.9rem 1.2rem; background: #1b3a73; color: #f2f2f2; font: 0.9rem monospace; }
+      @keyframes materialise { 0%, 100% { opacity: 0.12; } 50% { opacity: 1; } }
     </style>
-
-</head>
-<body style="background: url('assets/images/space-background.jpg') no-repeat center center fixed; background-size: cover;"> 
-    <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PNXVB4FF"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-    <!-- Spacey background -->
-    <div id="tardis-container">
-        <div id="intro-text">
-            Hi, I'm Minh Trinh. Click below to <i>enter the TARDIS</i>.
-        </div>
-        <img id="tardis-img" src="assets/images/tardis.png" alt="TARDIS">
-        
-        <div><a href="https://www.youtube.com/watch?v=OHHTw-chJ64" target = "_blank"><br><br>🛈 I don't get the reference... </a></div>
-    </div>
-
-    <script>
-        document.getElementById('tardis-img').addEventListener('click', function() {
-            window.location.href = '/interior/about-me';
-        });
-
-        let angle = 0; // Starting angle
-        const radius = 20; // Radius of the circle
-
-        function moveTardisInCircle() {
-            const tardisImg = document.getElementById('tardis-img');
-            // Calculate the new position
-            const xPos = radius * Math.cos(angle);
-            const yPos = radius * Math.sin(angle);
-            // Apply the new position
-            tardisImg.style.transform = `translate(${xPos}px, ${yPos}px)`;
-            // Increment the angle for the next frame
-            angle += 0.01; // Adjust this value to control the speed of the rotation
-        }
-
-        // Call moveTardisInCircle periodically to create the animation
-        setInterval(moveTardisInCircle, 20); // Adjust the interval for different speeds
-    </script>
-</body>
+  </head>
+  <body>
+    <div id="loader" aria-hidden="true"><img src="/favicon.svg" alt="" /></div>
+    <section id="for-agents"><pre>%LLMS%</pre><p>Plain text: <a href="/llms.txt" tabindex="-1">/llms.txt</a></p></section>
+    <p id="robot" hidden>%HELLO%</p>
+    <div id="scene"></div>
+    <p id="hint">scroll</p>
+    <div id="runway"></div>
+    <main id="card">%CARD%</main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>
